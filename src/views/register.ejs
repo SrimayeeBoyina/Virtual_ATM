@@ -1,0 +1,95 @@
+<%- include("partials/header") %>
+<%- include("partials/navbar") %>
+
+  <% if (typeof errorMessages !== 'undefined') { %> 
+    <% errorMessages && errorMessages.forEach((error) => { %>
+      <script>toastr.error('<%= error %>')</script>
+    <% }); %> 
+  <% } %> 
+
+  <div class="profile-form-page">
+    <div class="profile-form-page-container">
+      <div class="title-section">
+        <h1 class="form-heading">Register</h1>
+      </div>
+      <form action="/register" method="post" class="register-form" onsubmit="return validateForm()">
+        <div class="input-group">
+          <div class="label-container">
+            <label for="username" class="form-label">Username:</label>
+          </div>
+          <input type="text" placeholder="Username" name="username" required class="register-input">
+        </div>
+        <div class="input-group">
+          <div class="label-container">
+            <label for="email_id" class="form-label">Email:</label>
+          </div>
+          <input type="email" placeholder="Email" name="email_id" required class="register-input" id="email">
+          <span id="emailError" style="color: red"></span>
+        </div>
+        <div class="input-group">
+          <div class="label-container">
+            <label for="name" class="form-label">Name:</label>
+          </div>
+          <input type="text" placeholder="Name" name="name" required class="register-input">
+        </div>
+        <div class="input-group">
+          <div class="label-container">
+            <label for="password" class="form-label">Password:</label>
+          </div>
+          <input type="password" placeholder="Password" name="password" required class="register-input">
+        </div>
+        <div class="input-group">
+          <div class="label-container">
+            <label for="phno" class="form-label">Phone:</label>
+          </div>
+          <input type="text" placeholder="Phone No." name="phno" required class="register-input" id="phone">
+          <span id="phoneError" style="color: red"></span>
+        </div>
+        <div class="input-group">
+          <div class="label-container">
+            <label for="dob" class="form-label">DOB:</label>
+          </div>
+          <input type="date" name="dob" required class="register-date">
+        </div>
+        <div class="input-group">
+          <div class="label-container">
+            <label for="account_type" class="form-label">Account Type:</label>
+          </div>
+          <select name="account_type" class="register-select">
+            <% account_types.forEach((account_type) => { %>
+              <option value=<%= account_type.account_type_id %>><%= account_type.type_name %> </option>
+            <% }); %>
+
+          </select>
+        </div>
+        <button type="submit" class="atm-btn form-btn">Register</button>
+      </form>
+      <p class="form-footer">Already have an Account? <a href="/login">Login here.</a></p>
+    </div>
+  </div>
+  
+  <script>
+
+  function validateForm() {
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+    var emailError = document.getElementById("emailError");
+    var phoneError = document.getElementById("phoneError");
+  
+    // Email validation
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      emailError.innerHTML = "Please enter a valid email address.";
+      return false;
+    }
+  
+     // Phone number validation
+  var phonePattern = /^\d{10}$/;
+  if (!phonePattern.test(phone)) {
+    phoneError.innerHTML = "Please enter a valid 10 digit phone number.";
+    return false;
+  }
+}
+</script>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+<%- include("partials/navbar") %>
+
+  <% if (typeof logoutSuccess !== 'undefined') { %>
+    <script>toastr.info('<%= logoutSuccess %>')</script>
+  <% } %>
+  
+  <div class="home-page">
+    <section class="welcome-section" >
+      <img src="/images/anits.jpg" alt="atm-img" style="width:500px;height:30%;filter: drop-shadow(0px 7px 6px black);box-sizing:border-box;">
+      <br>
+      <h1>Welcome to VIRTUAL ATM</h1>
+      
+      <img src="/images/atm.svg" alt="atm-img" style="width:120px;height:20%;">
+    </section>
+    <section class="redirect-section">
+      <div class="redirect-login redirect-item">
+        <h2>Already Have an Account?</h2>
+        <a class="redirect-btn" href="/login"><p>Login</p></a>
+      </div>
+      <div class="redirect-register redirect-item">
+        <h2>New Here?</h2>
+        <a class="redirect-btn" href="/register"><p>Register</p></a>
+      </div>
+    </section>
+  </div>
+
+<%- include("partials/footer") %>
